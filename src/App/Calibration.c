@@ -81,8 +81,7 @@ void CalOn() {
 /**
  *
  */
-void 
-Calibracao() {
+void Calibracao() {
 
 	double xDouble;
 	double yDouble;
@@ -90,7 +89,7 @@ Calibracao() {
 
 	switch (state_cal) {
 
-	case CAL_WAIT:{
+	case CAL_WAIT:
 
 		if (CalReceive() == CAL_RECEIVING && calIndex > 2) { //maior do que dois porque nao existe comando com menos do que isso de tamanho
 
@@ -207,9 +206,9 @@ Calibracao() {
 
 		k_msleep(50);
 
-	}break;
+		break;
 
-	case CAL_START:{
+	case CAL_START:
 
 		matrixCal = 0;
 		vectorCal = 0;
@@ -243,14 +242,12 @@ Calibracao() {
 
 		state_cal = CAL_WAIT;
 
-	}break;
+		break;
 
-	case CAL_READ_RAW:{
+	case CAL_READ_RAW:
 		k_busy_wait(WAIT_A_MSEC * 300);
 		//faz a leitura do acelerometro sem aplicacao da calibracao
 		readXYZ();
-
-		//TODO: falta condicional para tratativa de sucesso/falha na aquisição do pacote com valores do XYZ
 
 		inc_GRAV_FIFO_raw(&xDouble, &yDouble, &zDouble);
 		memcpy(&bufferCalibration[2], &xDouble, 8);
@@ -270,11 +267,12 @@ Calibracao() {
 
 		state_cal = CAL_WAIT;
 
-	}break;
+		break;
 
-	case CAL_READ_CAL:{
-		k_busy_wait(WAIT_A_MSEC * 300);
+	case CAL_READ_CAL:
+
 		//faz a leitura do acelerometro com aplicacao da calibracao
+
 		readXYZ();
 
 		value = inc_GRAV_X();
@@ -301,7 +299,7 @@ Calibracao() {
 
 		state_cal = CAL_WAIT;
 
-	}break;
+		break;
 
 	case CAL_READ_MEMORY_CONFIG:
 
@@ -334,7 +332,7 @@ Calibracao() {
 
 		state_cal = CAL_WAIT;
 
-	break;
+		break;
 
 	case CAL_READ_STATUS:
 
@@ -358,7 +356,7 @@ Calibracao() {
 
 		state_cal = CAL_WAIT;
 
-	break;
+		break;
 
 	case CAL_WRITE_MATRIX_XYZ:
 
@@ -698,7 +696,7 @@ Calibracao() {
 		break;
 	}
 
-	k_msleep(200);
+	k_msleep(100);
 }
 
 /**

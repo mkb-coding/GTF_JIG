@@ -150,6 +150,75 @@ int main(void)
 
 	while(1){
 		calJigMain();
+		/*Calibracao();
+		if(parseCmd){
+
+			printk("Recv.: %s", bufferCmdRx);
+
+			if(bufferCmdRx[0] == 'S'){
+
+				scanState = SCAN_INIT;
+
+			}else if(bufferCmdRx[0] == 'C'){
+
+				bt_le_scan_stop();
+				scanState = SCAN_DONE;
+
+				uint8_t connId = bufferCmdRx[1] - '0';
+				if(bleListPos && (connId < bleListPos)){
+					bleConnect(&bleList[connId].addr);
+				}
+
+			}else if(bufferCmdRx[0] == 'D'){
+				bleDisconnect(default_conn);
+			}else if(bufferCmdRx[0] == 'R'){
+				bt_gtf_read_status(&gtf_client);
+			}else if(bufferCmdRx[0] == 'W'){
+				bt_gtf_read_status(&gtf_client);
+			}
+
+			parseCmd = false;
+			cmdIndex = 0;
+			memset(bufferCmdRx, 0, sizeof(bufferCmdRx));
+
+			uart_irq_rx_enable(cdc1_dev);
+
+		}
+
+		if(scanState == SCAN_INIT){
+
+			bleListPos = 0;
+
+			for(uint8_t i = 0; i < BLE_LIST_SIZE; i++){
+
+				memset(bleList[i].name, 0, sizeof((bleList[i].name)));
+				memset(bleList[i].rssi, 0, sizeof((bleList[i].rssi)));
+				memset(bleList[i].addr_str, 0, sizeof((bleList[i].addr_str)));
+				
+			}
+
+			start_scan();
+
+			scanState = SCAN_SCANNIG;
+
+		}else if(scanState == SCAN_DONE){
+			
+			printk(scanBuff, "\r\n----- Found %d devices -----\r\n", bleListPos);
+			//printk(scanBuff);
+
+			for(uint8_t i = 0; i < bleListPos; i++){
+				printk(scanBuff, "ID: %d - Name: %s - MAC: %s\r\n", i, bleList[i].name, bleList[i].addr_str);
+				//printk(scanBuff);
+			}
+
+			scanState = SCAN_STOPPED;
+		}*/
 	}
+	// indefinitely wait for input from the user 
+	/*while (k_msgq_get(&uart_msgq, &tx_buf, K_FOREVER) == 0) {
+		print_uart("Echo: ");
+		print_uart(tx_buf);
+		print_uart("\r\n");
+	}*/
 	return 0;
 }

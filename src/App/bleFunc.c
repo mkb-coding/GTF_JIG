@@ -11,9 +11,9 @@ bleSensData_t bleSensData = {0};
 bleConn_t bleConn = {.state = BLE_DISCONNECTED};
 
 bool newAccData = false;
-char bufAcc[256] = {0};
+char bufAcc[100] = {0};
 uint32_t bufAccPos = 0;
-char bufSts[256] = {0};
+char bufSts[100] = {0};
 uint32_t bufStsPos = 0;
 
 uint16_t currMTU = 0;
@@ -328,8 +328,8 @@ int gtf_client_init(void){
 uint8_t gtfNotifRcv(struct bt_gtf_client *gtf, const uint8_t *data, uint16_t len, uint16_t handle){
 
 	uint8_t ret = BT_GATT_ITER_CONTINUE;
-	uint8_t bufRaw[256] = {0};
-	uint8_t tmpVal[256] = {0};
+	uint8_t bufRaw[100] = {0};
+	uint8_t tmpVal[10] = {0};
 	uint32_t oLen = 0;
 	uint16_t crcRcv = 0;
 	uint16_t crcCalc = 0xffff;
@@ -411,6 +411,7 @@ uint8_t gtfNotifRcv(struct bt_gtf_client *gtf, const uint8_t *data, uint16_t len
 						newAccData = true;
 					}	
 				}
+
 				bufAccPos = 0;
 				memset(bufAcc, 0, sizeof(bufAcc));
 			}
